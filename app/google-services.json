@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1016699890853",
+    "firebase_url": "https://my-coin-d82e9.firebaseio.com",
+    "project_id": "my-coin-d82e9",
+    "storage_bucket": "my-coin-d82e9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1016699890853:android:120448eee1c488d006b14c",
+        "android_client_info": {
+          "package_name": "com.danilovalerio.mycoin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1016699890853-kv3g70d38qbve70vhacducdpi12k1mqv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9CL-XSO3m2AAIgH17bqSzKB3fh02kZ-I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1016699890853-kv3g70d38qbve70vhacducdpi12k1mqv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
