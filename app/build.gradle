@@ -9,7 +9,7 @@ android {
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.danilovalerio.mycoin"
-        minSdkVersion 21
+        minSdkVersion 16
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -28,6 +28,7 @@ android {
 }
 
 dependencies {
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.1.0'
@@ -45,7 +46,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:18.0.0'
 
     //Slider
-    implementation 'com.heinrichreimersoftware:material-intro:1.6.2'
+//    implementation 'com.heinrichreimersoftware:material-intro:1.6.2'
+//    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
 
 }
 
