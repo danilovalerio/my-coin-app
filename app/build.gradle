@@ -21,6 +21,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
+    dataBinding{
+        enabled = true
+    }
 }
 
 dependencies {
@@ -39,6 +43,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:18.0.0'
     //Autenticação
     implementation 'com.google.firebase:firebase-auth:18.0.0'
+
+    //Slider
+    implementation 'com.heinrichreimersoftware:material-intro:1.6.2'
 
 }
 
