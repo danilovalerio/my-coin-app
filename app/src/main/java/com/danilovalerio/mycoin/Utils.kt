@@ -18,3 +18,10 @@ fun validarEmail(email: String): Boolean {
     }
     return false
 }
+
+fun validarStr(s: String): Boolean{
+    if(s.isNullOrEmpty()){
+        return false
+    }
+    return true
+}

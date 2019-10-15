@@ -25,16 +25,12 @@ class CadastroActivity : AppCompatActivity() {
 
     private fun listeners() {
         btnCriarConta.setOnClickListener() {
-            val nome = etNome.text.toString()
-            val email = etEmail.text.toString()
-            val senha = etSenha.text.toString()
-
-            criarLogin(nome, email, senha)
+            criarLogin(etToString(etNome), etToString(etEmail), etToString(etSenha))
         }
     }
 
     private fun criarLogin(nome: String, email: String, senha: String) {
-        //Campos vazios
+        //Validar campos vazios
         if (nome.isEmpty()) {
             etNome.setError("Este campo não pode ser vazio")
         }
@@ -59,12 +55,9 @@ class CadastroActivity : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     val user = auth.currentUser
-                    msgShort(this, "Criação do Usuário com e-mail: success.")
+                    msgShort(this, "Usuário criado com sucesso.")
                 } else {
-                    Toast.makeText(
-                        baseContext, "Criação do Usuário com e-mail: failed.",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    msgShort(this,"Falha na criação do usuário\n"+task.exception!!.message.toString())
                 }
             }
     }
