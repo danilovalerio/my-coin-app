@@ -1,5 +1,6 @@
 package com.danilovalerio.mycoin.activity
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.danilovalerio.mycoin.R
@@ -25,10 +26,12 @@ class PrincipalActivity : AppCompatActivity() {
     private fun listeners(){
         menu_despesa.setOnClickListener(){
             msgShort(this,"Cadastro de despesa")
+            startActivity(Intent(this, DespesasActivity::class.java))
         }
 
         menu_receita.setOnClickListener(){
             msgShort(this,"Cadastro de receita")
+            startActivity(Intent(this, ReceitasActivity::class.java))
         }
     }
 
