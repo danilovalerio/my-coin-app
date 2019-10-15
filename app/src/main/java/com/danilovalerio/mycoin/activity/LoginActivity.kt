@@ -29,7 +29,6 @@ class LoginActivity : AppCompatActivity() {
 
         btnAcessar.setOnClickListener(){
             logar(etToString(etEmail), etToString(etSenha))
-//            startActivity(Intent(this,CadastroActivity::class.java))
         }
     }
 
@@ -56,13 +55,11 @@ class LoginActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     val user = auth.currentUser
                     msgShort(this, "Login efetuado")
-                    startActivity(Intent(this, PrincipalActivity::class.java))
-
+                    startActivity(Intent(baseContext, PrincipalActivity::class.java))
                 } else {
                     Toast.makeText(baseContext, "Autenticação falhou.",
                         Toast.LENGTH_SHORT).show()
                 }
             }
-
     }
 }
