@@ -56,6 +56,7 @@ class LoginActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     val user = auth.currentUser
                     msgShort(this, "Login efetuado")
+                    startActivity(Intent(this, PrincipalActivity::class.java))
 
                 } else {
                     Toast.makeText(baseContext, "Autenticação falhou.",
