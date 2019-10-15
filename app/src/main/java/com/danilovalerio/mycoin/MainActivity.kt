@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun listeners(){
         btnCadastrar.setOnClickListener(){
-            startActivity(Intent(this,CadastroActivity::class.java))
+            startActivity(Intent(this, CadastroActivity::class.java))
         }
 
         tvJaTenhoConta.setOnClickListener(){

@@ -21,8 +21,6 @@ allprojects {
     repositories {
         google()
         jcenter()
-        //Para utilizar o Slider informativo
-        maven { url 'https://jitpack.io' }
         
     }
 }

@@ -33,6 +33,8 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:drawableLeft="@drawable/ic_person"
+            android:drawablePadding="10dp"
             android:hint="Nome" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -52,6 +54,8 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:drawableLeft="@drawable/ic_email"
+            android:drawablePadding="10dp"
             android:hint="E-mail" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -70,14 +74,20 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:drawableLeft="@drawable/ic_lock"
+            android:drawablePadding="10dp"
             android:hint="Senha" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btnCriarConta"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:layout_marginLeft="64dp"
         android:layout_marginTop="32dp"
+        android:layout_marginEnd="64dp"
+        android:layout_marginRight="64dp"
         android:text="Cadastrar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
