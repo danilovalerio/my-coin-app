@@ -2,10 +2,10 @@ package com.danilovalerio.mycoin.activity
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Base64
 import androidx.appcompat.app.AppCompatActivity
 import com.danilovalerio.mycoin.R
-import com.danilovalerio.mycoin.msgShort
-import com.google.android.material.snackbar.Snackbar
+import com.danilovalerio.mycoin.helper.msgShort
 import kotlinx.android.synthetic.main.activity_principal.*
 
 class PrincipalActivity : AppCompatActivity() {
@@ -25,12 +25,12 @@ class PrincipalActivity : AppCompatActivity() {
 
     private fun listeners(){
         menu_despesa.setOnClickListener(){
-            msgShort(this,"Cadastro de despesa")
+            msgShort(this, "Cadastro de despesa")
             startActivity(Intent(this, DespesasActivity::class.java))
         }
 
         menu_receita.setOnClickListener(){
-            msgShort(this,"Cadastro de receita")
+            msgShort(this, "Cadastro de receita")
             startActivity(Intent(this, ReceitasActivity::class.java))
         }
     }

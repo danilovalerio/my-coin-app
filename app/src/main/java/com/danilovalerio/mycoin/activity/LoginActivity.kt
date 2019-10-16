@@ -3,9 +3,12 @@ package com.danilovalerio.mycoin.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import com.danilovalerio.mycoin.*
+import com.danilovalerio.mycoin.helper.etToString
+import com.danilovalerio.mycoin.helper.msgShort
+import com.danilovalerio.mycoin.helper.validarEmail
+import com.danilovalerio.mycoin.helper.validarStr
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -28,7 +31,10 @@ class LoginActivity : AppCompatActivity() {
         }
 
         btnAcessar.setOnClickListener(){
-            logar(etToString(etEmail), etToString(etSenha))
+            logar(
+                etToString(etEmail),
+                etToString(etSenha)
+            )
         }
     }
 
@@ -46,7 +52,10 @@ class LoginActivity : AppCompatActivity() {
             etSenha.setError("Preencha este campo.")
         }
 
-        if(!validarEmail(email) || !validarStr(email) || !validarStr(senha)){
+        if(!validarEmail(email) || !validarStr(
+                email
+            ) || !validarStr(senha)
+        ){
             return
         }
 

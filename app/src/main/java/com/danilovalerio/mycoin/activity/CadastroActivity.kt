@@ -1,31 +1,37 @@
 package com.danilovalerio.mycoin.activity
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.danilovalerio.mycoin.R
-import com.danilovalerio.mycoin.etToString
-import com.danilovalerio.mycoin.msgShort
-import com.danilovalerio.mycoin.validarEmail
+import com.danilovalerio.mycoin.helper.*
+import com.danilovalerio.mycoin.model.Usuario
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_cadastro.*
 
 class CadastroActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
+    private lateinit var firebase: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_cadastro)
 
         auth = FirebaseAuth.getInstance()
+        firebase = FirebaseDatabase.getInstance().getReference()
         listeners()
 
     }
 
     private fun listeners() {
         btnCriarConta.setOnClickListener() {
-            criarLogin(etToString(etNome), etToString(etEmail), etToString(etSenha))
+            criarLogin(
+                etToString(etNome),
+                etToString(etEmail),
+                etToString(etSenha)
+            )
         }
     }
 
@@ -55,10 +61,23 @@ class CadastroActivity : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     val user = auth.currentUser
-                    msgShort(this, "Usuário criado com sucesso.")
+                    msgShort(this, "Usuário criado com sucesso.\n" + auth.uid.toString())
+                    val usuario = Usuario(auth.uid.toString(), nome, email, senha)
+                    salvarUsuarioEmailId(usuario)
                 } else {
-                    msgShort(this,"Falha na criação do usuário\n"+task.exception!!.message.toString())
+                    msgShort(
+                        this,
+                        "Falha na criação do usuário\n" + task.exception!!.message.toString()
+                    )
                 }
             }
+    }
+
+    private fun salvarUsuarioEmailId(usuario: Usuario) {
+        val email = usuario.email
+        val codificado = codificarBase64(email)
+        firebase.child("usuarios")
+            .child(codificado)
+            .setValue(usuario)
     }
 }
