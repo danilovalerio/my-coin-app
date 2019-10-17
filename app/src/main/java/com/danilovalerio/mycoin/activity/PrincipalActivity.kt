@@ -78,8 +78,7 @@ class PrincipalActivity : AppCompatActivity() {
                     val resultFormatado = decFormat.format(resumoUsuario)
 
                     tvSaudacao.setText("Olá "+anyMap.getValue("nome"))
-                    tvSaldoGeral.setText(resultFormatado)
-
+                    tvSaldoGeral.setText("R$ "+resultFormatado)
                 }
             }
 

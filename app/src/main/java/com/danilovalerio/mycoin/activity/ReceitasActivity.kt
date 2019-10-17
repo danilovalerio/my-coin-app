@@ -79,10 +79,11 @@ class ReceitasActivity : AppCompatActivity()  {
                 .push() //para criar o idFirebase
                 .setValue(movimentacao)
 
-            msgShort(this, "Dado inserido com sucesso.")
+            msgShort(this, "Sucesso na inserção.")
+            finish()
 
         } catch (e: Exception) {
-            msgShort(this, "Falhou a inserção:" + e.toString())
+            msgShort(this, "Falha na inserção:" + e.toString())
         }
     }
 
