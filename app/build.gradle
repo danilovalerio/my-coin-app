@@ -55,6 +55,9 @@ dependencies {
     //Floating Button Menu
     implementation 'com.github.clans:fab:1.6.4'
 
+    //viewCalendar personalizado
+    compile 'com.prolificinteractive:material-calendarview:1.4.3'
+
 }
 
 apply plugin: 'com.google.gms.google-services'
