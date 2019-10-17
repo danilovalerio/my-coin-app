@@ -10,15 +10,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".activity.ReceitasActivity"
-            android:theme="@style/receitaTheme"></activity>
+            android:theme="@style/receitaTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".activity.DespesasActivity"
             android:theme="@style/despesaTheme">
-                     <intent-filter>
-                     <action android:name="android.intent.action.MAIN" />
 
-
-                     <category android:name="android.intent.category.LAUNCHER" />
-                     </intent-filter>
         </activity>
         <activity
             android:name=".activity.PrincipalActivity"
