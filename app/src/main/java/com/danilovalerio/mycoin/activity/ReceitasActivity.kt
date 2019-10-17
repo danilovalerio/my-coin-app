@@ -26,6 +26,8 @@ class ReceitasActivity : AppCompatActivity()  {
         firebase = FirebaseDatabase.getInstance().getReference()
         etData.setText(dataAtual())
 
+        recuperarReceitaTotal()
+
         listeners()
 
     }
@@ -52,13 +54,12 @@ class ReceitasActivity : AppCompatActivity()  {
                         if (!etToString(etDescricao).isNullOrEmpty()) etToString(etDescricao) else null
                     )
 
-                    recuperarReceitaTotal()
                     salvarMovimentacao(movimentacao)
 
                     receitaGerada = valor.toDouble()
                     receitaAtualizada = (receitaTotal.plus(receitaGerada))
 
-                    atualizarDespesaTotal(receitaAtualizada)
+                    atualizarReceitaTotal(receitaAtualizada)
 
                 }
             } catch (e: Exception) {
@@ -107,13 +108,13 @@ class ReceitasActivity : AppCompatActivity()  {
         })
     }
 
-    private fun atualizarDespesaTotal(despesa: Double){
+    private fun atualizarReceitaTotal(receita: Double){
 
         val emailUsuario = auth.currentUser?.email.toString()
         val idUsuario = codificarBase64(emailUsuario)
         val usuarioRef: DatabaseReference = firebase.child("usuarios").child(idUsuario)
 
-        usuarioRef.child("receitaTotal").setValue(despesa)
+        usuarioRef.child("receitaTotal").setValue(receita)
 
     }
 

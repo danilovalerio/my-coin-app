@@ -27,6 +27,8 @@ class DespesasActivity : AppCompatActivity() {
         firebase = FirebaseDatabase.getInstance().getReference()
         etData.setText(dataAtual())
 
+        recuperarDespesaTotal()
+
         listeners()
 
     }
@@ -53,7 +55,6 @@ class DespesasActivity : AppCompatActivity() {
                         if (!etToString(etDescricao).isNullOrEmpty()) etToString(etDescricao) else null
                     )
 
-                    recuperarDespesaTotal()
                     salvarMovimentacao(movimentacao)
 
                     despesaGerada = valor.toDouble()

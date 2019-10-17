@@ -23,6 +23,10 @@ class LoginActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
         listeners()
+
+        if(usuarioLogado()){
+            startActivity(Intent(this, PrincipalActivity::class.java))
+        }
     }
 
     private fun listeners(){
@@ -75,5 +79,14 @@ class LoginActivity : AppCompatActivity() {
         } catch (e: Exception) {
             msgShort(this, e.toString())
         }
+    }
+
+    private fun usuarioLogado() : Boolean {
+        val usuario = auth.currentUser?.uid.toString()
+        if(usuario.isNullOrEmpty() || usuario == "null"){
+            return false
+        }
+
+        return true
     }
 }
