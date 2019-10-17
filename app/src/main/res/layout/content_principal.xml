@@ -1,6 +1,62 @@
-<fragment
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    />
+    android:layout_height="match_parent">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
+        android:orientation="vertical"
+        android:background="@color/colorPrimary"
+        android:gravity="center_vertical">
+
+
+        <TextView
+            android:id="@+id/tvCarregando"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Carregando..."
+            android:textSize="18sp"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"/>
+        <TextView
+            android:id="@+id/tvSaldoGeral"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="R$ 0,00"
+            android:textSize="28sp"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"/>
+        <TextView
+            android:id="@+id/tvLabelSaldoGeral"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Saldo"
+            android:textSize="18sp"
+            android:textAlignment="center"
+            android:textColor="@android:color/white"/>
+    </LinearLayout>
+
+    <!--  original de https://github.com/prolificinteractive/material-calendarview/wiki  -->
+    <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+        android:id="@+id/calendarView"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:mcv_selectionColor="@color/colorPrimary"
+        app:mcv_showOtherDates="all"
+        app:mcv_tileSize="50dp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+</LinearLayout>

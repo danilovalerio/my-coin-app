@@ -25,3 +25,11 @@ fun validarStr(s: String): Boolean{
     }
     return true
 }
+
+fun mesesPortugues() : Array<String> {
+    //definir valores predefinidos para meses
+    val meses = arrayOf<String>("Janeiro","Fevereiro","Março","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro")
+    return meses
+//    var semanas = arrayOf<String>("Seg","Ter","Qua","Qui","Sex","Sáb","Dom")
+//    calendarView.setWeekDayLabels(semanas)
+}
