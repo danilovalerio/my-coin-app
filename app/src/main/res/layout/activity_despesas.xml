@@ -25,6 +25,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <EditText
+            android:id="@+id/etValor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="numberDecimal"
@@ -103,18 +104,21 @@
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
-
-    <com.github.clans.fab.FloatingActionMenu
-        android:id="@+id/menu"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabSalvar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
         android:layout_marginBottom="32dp"
+        android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu_icon="@drawable/ic_check_white" />
+        app:srcCompat="@drawable/ic_check_white" />
+
+
+
+
+
 
 
 

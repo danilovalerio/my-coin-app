@@ -3,6 +3,7 @@ package com.danilovalerio.mycoin.activity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.danilovalerio.mycoin.R
+import com.danilovalerio.mycoin.config.ConfiguracaoFirebase
 import com.danilovalerio.mycoin.helper.*
 import com.danilovalerio.mycoin.model.Usuario
 import com.google.firebase.auth.FirebaseAuth
@@ -21,6 +22,7 @@ class CadastroActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
         firebase = FirebaseDatabase.getInstance().getReference()
+
         listeners()
 
     }
