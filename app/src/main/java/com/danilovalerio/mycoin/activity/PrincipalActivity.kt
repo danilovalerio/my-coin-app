@@ -7,10 +7,13 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.danilovalerio.mycoin.MovimentacaoAdapter
 import com.danilovalerio.mycoin.R
 import com.danilovalerio.mycoin.helper.codificarBase64
 import com.danilovalerio.mycoin.helper.mesesPortugues
 import com.danilovalerio.mycoin.helper.msgShort
+import com.danilovalerio.mycoin.model.Movimentacao
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.prolificinteractive.materialcalendarview.CalendarDay
@@ -22,12 +25,14 @@ import java.text.DecimalFormat
 import java.util.*
 
 class PrincipalActivity : AppCompatActivity() {
-
     private lateinit var auth: FirebaseAuth
     private lateinit var firebase: DatabaseReference
     private lateinit var usuarioRef: DatabaseReference
     //trata um eventListener para que ao fechar o app não fique atualizando com o firebase
     private lateinit var valueEventListenerUsuario: ValueEventListener
+
+    //Adapter
+    lateinit var movimentacaoAdapter: MovimentacaoAdapter
 
     private var despesaTotal: Double = 0.0
     private var receitaTotal: Double = 0.0
@@ -37,9 +42,35 @@ class PrincipalActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_principal)
 
+        //Mock para teste do Recycler
+        val movimentacaoList: MutableList<Movimentacao> = mutableListOf(
+            Movimentacao(100.0,"d","10/10/2019","Almoço","Almoço caro"),
+            Movimentacao(200.0,"d","10/10/2019","Almoço","Almoço caro"),
+            Movimentacao(300.0,"d","10/10/2019","Almoço","Almoço caro"),
+            Movimentacao(150.0,"d","10/10/2019","Almoço","Almoço caro"),
+            Movimentacao(215.0,"d","10/10/2019","Almoço","Almoço caro"),
+            Movimentacao(150.0,"d","10/10/2019","Almoço","Almoço caro"),
+            Movimentacao(123.0,"d","10/10/2019","Almoço","Almoço caro"),
+            Movimentacao(100.0,"d","10/10/2019","Almoço","Almoço caro"),
+            Movimentacao(100.0,"d","10/10/2019","Almoço","Almoço caro"),
+            Movimentacao(200.0,"d","10/10/2019","Almoço","Almoço caro"),
+            Movimentacao(300.0,"d","10/10/2019","Almoço","Almoço caro"),
+            Movimentacao(150.0,"d","10/10/2019","Almoço","Almoço caro"),
+            Movimentacao(215.0,"d","10/10/2019","Almoço","Almoço caro"),
+            Movimentacao(150.0,"d","10/10/2019","Almoço","Almoço caro"),
+            Movimentacao(123.0,"d","10/10/2019","Almoço","Almoço caro"),
+            Movimentacao(100.0,"d","10/10/2019","Almoço","Almoço caro"),
+            Movimentacao(111.0,"d","10/10/2019","Almoço","Almoço caro")
+        )
+
+        //Adapter de exemplo
+        movimentacaoAdapter = MovimentacaoAdapter(this, movimentacaoList)
+        recViewMovimentos.adapter = movimentacaoAdapter
+        recViewMovimentos.layoutManager = LinearLayoutManager(this)
+        //recViewMovimentos.smoothScrollToPosition(movimentacaoList.size)
+
         auth = FirebaseAuth.getInstance()
         firebase = FirebaseDatabase.getInstance().getReference()
-
 
         setSupportActionBar(toolbar)
 
@@ -56,7 +87,6 @@ class PrincipalActivity : AppCompatActivity() {
 //            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
 //                .setAction("Action", null).show()
 //        }
-
         listeners()
 
     }
@@ -66,7 +96,7 @@ class PrincipalActivity : AppCompatActivity() {
         val idUsuario = codificarBase64(emailUsuario)
         usuarioRef = firebase.child("usuarios").child(idUsuario)
 
-        Log.i("onStop", "eventoListener foi adicionado")
+        Log.i("eventoListener", "eventoListener foi adicionado")
         valueEventListenerUsuario = usuarioRef.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.hasChildren()) {
@@ -89,7 +119,7 @@ class PrincipalActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(databaseError: DatabaseError) {
-                Log.e("TAG", databaseError.message)
+                Log.e("erroBanco", databaseError.message)
             }
         })
 
@@ -136,7 +166,7 @@ class PrincipalActivity : AppCompatActivity() {
     override fun onStop() { //quando o app não é mais utilizado
         super.onStop()
         usuarioRef.removeEventListener(valueEventListenerUsuario)
-        Log.i("onStop", "eventoListener foi removido")
+        Log.i("eventoListener", "eventoListener foi removido")
 
     }
 
