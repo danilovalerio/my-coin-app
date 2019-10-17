@@ -25,6 +25,10 @@ class PrincipalActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
     private lateinit var firebase: DatabaseReference
+    private lateinit var usuarioRef: DatabaseReference
+    //trata um eventListener para que ao fechar o app não fique atualizando com o firebase
+    private lateinit var valueEventListenerUsuario: ValueEventListener
+
     private var despesaTotal: Double = 0.0
     private var receitaTotal: Double = 0.0
     private var resumoUsuario: Double = 0.0
@@ -35,6 +39,8 @@ class PrincipalActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
         firebase = FirebaseDatabase.getInstance().getReference()
+
+
         setSupportActionBar(toolbar)
 
         calendarView.state().edit()
@@ -51,7 +57,6 @@ class PrincipalActivity : AppCompatActivity() {
 //                .setAction("Action", null).show()
 //        }
 
-        recuperarResumo()
         listeners()
 
     }
@@ -59,9 +64,10 @@ class PrincipalActivity : AppCompatActivity() {
     private fun recuperarResumo(){
         val emailUsuario = auth.currentUser?.email.toString()
         val idUsuario = codificarBase64(emailUsuario)
-        val usuarioRef: DatabaseReference = firebase.child("usuarios").child(idUsuario)
+        usuarioRef = firebase.child("usuarios").child(idUsuario)
 
-        usuarioRef.addValueEventListener(object : ValueEventListener{
+        Log.i("onStop", "eventoListener foi adicionado")
+        valueEventListenerUsuario = usuarioRef.addValueEventListener(object : ValueEventListener{
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.hasChildren()) {
                     val anyMap: HashMap<Any, Any>
@@ -120,6 +126,18 @@ class PrincipalActivity : AppCompatActivity() {
         calendarView.setOnMonthChangedListener({widget, date ->
             msgShort(this,date.month.plus(1).toString())
         })
+    }
+
+    override fun onStart() {
+        super.onStart()
+        recuperarResumo()
+    }
+
+    override fun onStop() { //quando o app não é mais utilizado
+        super.onStop()
+        usuarioRef.removeEventListener(valueEventListenerUsuario)
+        Log.i("onStop", "eventoListener foi removido")
+
     }
 
 }
