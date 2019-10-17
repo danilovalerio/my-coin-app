@@ -16,7 +16,7 @@
 
 
         <TextView
-            android:id="@+id/tvCarregando"
+            android:id="@+id/tvSaudacao"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Carregando..."
@@ -54,7 +54,7 @@
         app:mcv_tileSize="50dp" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/recViewMovimentos"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

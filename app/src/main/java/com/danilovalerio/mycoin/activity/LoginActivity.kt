@@ -11,6 +11,7 @@ import com.danilovalerio.mycoin.helper.validarEmail
 import com.danilovalerio.mycoin.helper.validarStr
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
+import java.lang.Exception
 
 class LoginActivity : AppCompatActivity() {
 
@@ -21,7 +22,6 @@ class LoginActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login)
 
         auth = FirebaseAuth.getInstance()
-
         listeners()
     }
 
@@ -38,37 +38,42 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun logar(email:String, senha:String){
+    private fun logar(email:String, senha:String) {
 
-        if(!validarEmail(email)){
-            etEmail.setError("E-mail inválido.")
-        }
+        try {
 
-        if(!validarStr(email)){
-            etEmail.setError("Preencha este campo.")
-        }
 
-        if(!validarStr(senha)){
-            etSenha.setError("Preencha este campo.")
-        }
-
-        if(!validarEmail(email) || !validarStr(
-                email
-            ) || !validarStr(senha)
-        ){
-            return
-        }
-
-        auth.signInWithEmailAndPassword(email, senha)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    val user = auth.currentUser
-                    msgShort(this, "Login efetuado")
-                    startActivity(Intent(baseContext, PrincipalActivity::class.java))
-                } else {
-                    Toast.makeText(baseContext, "Autenticação falhou.",
-                        Toast.LENGTH_SHORT).show()
-                }
+            if (!validarEmail(email)) {
+                etEmail.setError("E-mail inválido.")
             }
+
+            if (!validarStr(email)) {
+                etEmail.setError("Preencha este campo.")
+            }
+
+            if (!validarStr(senha)) {
+                etSenha.setError("Preencha este campo.")
+            }
+
+            if (!validarEmail(email) || !validarStr(email) || !validarStr(senha)) {
+                return
+            }
+
+            auth.signInWithEmailAndPassword(email, senha)
+                .addOnCompleteListener(this) { task ->
+                    if (task.isSuccessful) {
+                        //val user = auth.currentUser.toString()
+                        msgShort(this, "Login efetuado")
+                        startActivity(Intent(this, PrincipalActivity::class.java))
+                    } else {
+                        Toast.makeText(
+                            baseContext, "Autenticação falhou.",
+                            Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+        } catch (e: Exception) {
+            msgShort(this, e.toString())
+        }
     }
 }
