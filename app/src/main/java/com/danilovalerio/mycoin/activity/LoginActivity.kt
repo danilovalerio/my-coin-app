@@ -26,6 +26,7 @@ class LoginActivity : AppCompatActivity() {
 
         if(usuarioLogado()){
             startActivity(Intent(this, PrincipalActivity::class.java))
+            finish()
         }
     }
 
@@ -45,8 +46,6 @@ class LoginActivity : AppCompatActivity() {
     private fun logar(email:String, senha:String) {
 
         try {
-
-
             if (!validarEmail(email)) {
                 etEmail.setError("E-mail inválido.")
             }
@@ -75,7 +74,6 @@ class LoginActivity : AppCompatActivity() {
                             Toast.LENGTH_SHORT).show()
                     }
                 }
-
         } catch (e: Exception) {
             msgShort(this, e.toString())
         }

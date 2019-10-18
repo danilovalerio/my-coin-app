@@ -1,5 +1,6 @@
 package com.danilovalerio.mycoin.activity
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.danilovalerio.mycoin.R
@@ -68,6 +69,8 @@ class CadastroActivity : AppCompatActivity() {
                     msgShort(this, "Usuário criado com sucesso.\n" + auth.uid.toString())
                     val usuario = Usuario(auth.uid.toString(), nome, email, senha)
                     salvarUsuarioEmailId(usuario)
+                    startActivity(Intent(this,PrincipalActivity::class.java))
+                    finish()
                 } else {
                     msgShort(
                         this,

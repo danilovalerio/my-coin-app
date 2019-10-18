@@ -76,7 +76,8 @@
             android:layout_gravity="center"
             android:drawableLeft="@drawable/ic_lock"
             android:drawablePadding="10dp"
-            android:hint="Senha" />
+            android:hint="Senha"
+            android:inputType="textPassword"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button

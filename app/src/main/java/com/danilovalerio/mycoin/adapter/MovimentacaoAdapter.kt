@@ -1,10 +1,11 @@
-package com.danilovalerio.mycoin
+package com.danilovalerio.mycoin.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.danilovalerio.mycoin.R
 import com.danilovalerio.mycoin.model.Movimentacao
 import kotlinx.android.synthetic.main.item_rv_movimentos.view.*
 
