@@ -35,4 +35,12 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <!--  Estilo padrão editText  -->
+    <style name="teste">
+        <item name="android:textColor">@color/textWhite</item>
+        <item name="android:textColorHint">#66FFFFFF</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:background">@drawable/bg_btn_arredondado_colorprimary</item>
+    </style>
+
 </resources>

@@ -4,6 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.core.graphics.toColorFilter
+import androidx.core.graphics.toColorInt
 import com.danilovalerio.mycoin.*
 import com.danilovalerio.mycoin.helper.etToString
 import com.danilovalerio.mycoin.helper.msgShort
@@ -46,16 +48,20 @@ class LoginActivity : AppCompatActivity() {
     private fun logar(email:String, senha:String) {
 
         try {
+            val corError = "#FFFC00"
             if (!validarEmail(email)) {
                 etEmail.setError("E-mail inválido.")
+                etEmail.setHintTextColor(corError.toColorInt())
             }
 
             if (!validarStr(email)) {
                 etEmail.setError("Preencha este campo.")
+                etEmail.setHintTextColor(corError.toColorInt())
             }
 
             if (!validarStr(senha)) {
                 etSenha.setError("Preencha este campo.")
+                etEmail.setHintTextColor(corError.toColorInt())
             }
 
             if (!validarEmail(email) || !validarStr(email) || !validarStr(senha)) {

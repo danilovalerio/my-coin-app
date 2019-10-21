@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary">#2F6FDB</color>
+    <color name="colorPrimaryDark">#415e9b</color>
+    <color name="colorAccent">#06DEF1</color>
+    <color name="bgColor">#5983DA</color>
+    <color name="bgColorDois">#3578e5</color>
+
+    <!--  Cores Texto Botões  -->
+    <color name="textWhite">#FFF</color>
 
     <!--  Cores receitas  -->
     <color name="colorPrimaryReceita">#00D39E</color>
@@ -14,5 +19,5 @@
     <color name="colorPrimaryDarkDespesa">#E66560</color>
     <color name="colorPrimaryAccentDespesa">#FF706A</color>
 
-    <color name="colorBgIconMenu">#FFf</color>
+    <color name="colorBgIconMenu">#FFF</color>
 </resources>
