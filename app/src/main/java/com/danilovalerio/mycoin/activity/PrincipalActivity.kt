@@ -1,10 +1,12 @@
 package com.danilovalerio.mycoin.activity
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -110,8 +112,8 @@ class PrincipalActivity : AppCompatActivity() {
                 }
 
                 override fun onSwiped(viewHolder: ViewHolder, direction: Int) {
-                    // remove from adapter
-                    Log.i("swipe", "Item foi arrastado.")
+                    Log.i("swipe", "Item foi arrastado para START ou END.")
+                    excluirMovimentacao(viewHolder)
                 }
 
                 override fun getMovementFlags(
@@ -129,6 +131,30 @@ class PrincipalActivity : AppCompatActivity() {
         itemTouch.attachToRecyclerView(recViewMovimentos) //aplica o evento callback ao RecyclerView
 
 
+
+    }
+
+    private fun excluirMovimentacao(viewHolder: ViewHolder){//passa a posição do item viewHolder
+        val alertDialog: AlertDialog.Builder = AlertDialog.Builder(this)
+
+        //configuração do AlertDialog
+        alertDialog.setTitle("Excluir Movimentação da Conta")
+        alertDialog.setMessage("Você tem certeza que deseja excluir esta movimentação?")
+        alertDialog.setCancelable(false)
+
+        alertDialog.setPositiveButton("Confirmar", DialogInterface.OnClickListener{
+            dialogInterface, id ->
+
+        })
+
+        alertDialog.setNegativeButton("Cancelar", DialogInterface.OnClickListener{
+                dialogInterface, id ->
+            msgShort(this, "Exclusão cancelada.")
+            movimentacaoAdapter.notifyDataSetChanged()
+        })
+
+        alertDialog.create()
+        alertDialog.show()
 
     }
 
