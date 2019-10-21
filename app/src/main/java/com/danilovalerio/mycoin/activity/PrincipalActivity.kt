@@ -28,8 +28,8 @@ class PrincipalActivity : AppCompatActivity() {
     private lateinit var firebase: DatabaseReference
     private lateinit var usuarioRef: DatabaseReference
     //trata um eventListener para que ao fechar o app não fique atualizando com o firebase
-    private lateinit var valueEventListenerUsuario: ValueEventListener
-    private lateinit var valueEventListenerMovimentacao: ValueEventListener
+    private var valueEventListenerUsuario: ValueEventListener ? = null
+    private var valueEventListenerMovimentacao: ValueEventListener? = null
 
     //Adapter
     lateinit var movimentacaoAdapter: MovimentacaoAdapter
@@ -203,12 +203,16 @@ class PrincipalActivity : AppCompatActivity() {
 
         calendarView.setOnMonthChangedListener({ widget, date ->
             msgShort(this, date.month.plus(1).toString())
-            if (date.month < 10) {
+            if (date.month < 9) {
                 mesSelecionado = "0" + date.month.plus(1).toString()
             } else {
                 mesSelecionado = date.month.plus(1).toString()
             }
             mesAnoSelecionado = mesSelecionado + date.year
+            if(valueEventListenerMovimentacao != null){
+                movimentacaoRef.removeEventListener(valueEventListenerMovimentacao!!)//remove o evento anterior
+            }
+            recuperarMovimentacoes()
         })
     }
 
@@ -220,9 +224,13 @@ class PrincipalActivity : AppCompatActivity() {
 
     override fun onStop() { //quando o app não é mais utilizado
         super.onStop()
-        usuarioRef.removeEventListener(valueEventListenerUsuario)
+        if (valueEventListenerUsuario != null){
+            usuarioRef.removeEventListener(valueEventListenerUsuario!!)
+        }
         Log.i("eventoListener", "eventoListener foi removido")
-//        movimentacaoRef.removeEventListener(valueEventListenerMovimentacao) //está dando erro ao lançar movimentação
+        if(valueEventListenerMovimentacao != null) {
+            movimentacaoRef.removeEventListener(valueEventListenerMovimentacao!!) //está dando erro ao lançar movimentação
+        }
 
     }
 

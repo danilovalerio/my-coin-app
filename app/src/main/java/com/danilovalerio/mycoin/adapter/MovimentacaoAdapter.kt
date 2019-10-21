@@ -4,10 +4,14 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.graphics.toColorInt
 import androidx.recyclerview.widget.RecyclerView
 import com.danilovalerio.mycoin.R
+import com.danilovalerio.mycoin.R.color.colorPrimaryDespesa
+import com.danilovalerio.mycoin.R.color.colorPrimaryReceita
 import com.danilovalerio.mycoin.model.Movimentacao
 import kotlinx.android.synthetic.main.item_rv_movimentos.view.*
+import kotlin.math.absoluteValue
 
 class MovimentacaoAdapter(
     private val context: Context,
@@ -28,7 +32,7 @@ class MovimentacaoAdapter(
         holder: MovimentacaoViewHolder,
         position: Int
     ) {
-        holder.bindView(movimentacaoList[position])
+        holder.bindView(movimentacaoList[position], context)
     }
 
     class MovimentacaoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -36,10 +40,21 @@ class MovimentacaoAdapter(
         val tvDescricao = itemView.tvDescricao
         val tvValor = itemView.tvValor
 
-        fun bindView(movimentacao: Movimentacao) {
+        fun bindView(movimentacao: Movimentacao, context: Context) {
             tvTitulo.text = movimentacao.categoria
             tvDescricao.text = movimentacao.descricao
             tvValor.text = movimentacao.valor.toString()
+
+            if(movimentacao.tipo == "d"){
+                tvValor.setTextColor(context.getString(colorPrimaryDespesa.absoluteValue).toColorInt())
+                tvValor.setText("- "+movimentacao.valor)
+            } else {
+                tvValor.setTextColor(context.getString(colorPrimaryReceita.absoluteValue).toColorInt())
+            }
+
+
+
+
         }
     }
 }

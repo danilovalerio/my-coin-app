@@ -81,6 +81,7 @@ class DespesasActivity : AppCompatActivity() {
                 .setValue(movimentacao)
 
             msgShort(this, "Sucesso na inserção.")
+            finish()
 
         } catch (e: Exception) {
             msgShort(this, "Falha na inserção:" + e.toString())
