@@ -6,9 +6,9 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.danilovalerio.mycoin.adapter.MovimentacaoAdapter
-import com.danilovalerio.mycoin.R
 import com.danilovalerio.mycoin.helper.codificarBase64
 import com.danilovalerio.mycoin.helper.mesesPortugues
 import com.danilovalerio.mycoin.helper.msgShort
@@ -21,14 +21,18 @@ import kotlinx.android.synthetic.main.activity_principal.*
 import kotlinx.android.synthetic.main.content_principal.*
 import java.text.DecimalFormat
 import java.util.*
+import com.danilovalerio.mycoin.R
 import kotlin.collections.HashMap
+import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import androidx.recyclerview.widget.RecyclerView
+
 
 class PrincipalActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var firebase: DatabaseReference
     private lateinit var usuarioRef: DatabaseReference
     //trata um eventListener para que ao fechar o app não fique atualizando com o firebase
-    private var valueEventListenerUsuario: ValueEventListener ? = null
+    private var valueEventListenerUsuario: ValueEventListener? = null
     private var valueEventListenerMovimentacao: ValueEventListener? = null
 
     //Adapter
@@ -58,6 +62,17 @@ class PrincipalActivity : AppCompatActivity() {
 
         setSupportActionBar(toolbar)
 
+        configurarCalendario()
+        swipe() //evendo deslizar
+//        menu.setOnClickListener { view ->
+//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                .setAction("Action", null).show()
+//        }
+        listeners()
+
+    }
+
+    private fun configurarCalendario() {
         calendarView.state().edit()
             .setFirstDayOfWeek(Calendar.WEDNESDAY)
             .setMinimumDate(CalendarDay.from(1930, 0, 1))
@@ -74,11 +89,46 @@ class PrincipalActivity : AppCompatActivity() {
         }
         mesAnoSelecionado = mesAtual + dataAtual.year.toString()
 
-//        menu.setOnClickListener { view ->
-//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                .setAction("Action", null).show()
-//        }
-        listeners()
+
+    }
+
+    fun swipe() {
+
+        val itemTouch = ItemTouchHelper(
+            object : ItemTouchHelper.SimpleCallback(
+                ItemTouchHelper.UP or ItemTouchHelper.DOWN,
+                ItemTouchHelper.LEFT
+            ) {
+                override fun onMove(
+                    recyclerView: RecyclerView,
+                    viewHolder: ViewHolder, target: ViewHolder
+                ): Boolean {
+                    val fromPos = viewHolder.adapterPosition
+                    val toPos = target.adapterPosition
+                    // move item in `fromPos` to `toPos` in adapter.
+                    return true// true if moved, false otherwise
+                }
+
+                override fun onSwiped(viewHolder: ViewHolder, direction: Int) {
+                    // remove from adapter
+                    Log.i("swipe", "Item foi arrastado.")
+                }
+
+                override fun getMovementFlags(
+                    recyclerView: RecyclerView,
+                    viewHolder: ViewHolder
+                ): Int {
+                    var dragFlags = ItemTouchHelper.ACTION_STATE_IDLE
+                    //define as direções do swipe < START | END >
+                    var swipeFlags = ItemTouchHelper.START or ItemTouchHelper.END
+                    return ItemTouchHelper.Callback.makeMovementFlags(dragFlags, swipeFlags)
+                    //return super.getMovementFlags(recyclerView, viewHolder)
+                }
+            })
+
+        itemTouch.attachToRecyclerView(recViewMovimentos) //aplica o evento callback ao RecyclerView
+
+
 
     }
 
@@ -209,7 +259,7 @@ class PrincipalActivity : AppCompatActivity() {
                 mesSelecionado = date.month.plus(1).toString()
             }
             mesAnoSelecionado = mesSelecionado + date.year
-            if(valueEventListenerMovimentacao != null){
+            if (valueEventListenerMovimentacao != null) {
                 movimentacaoRef.removeEventListener(valueEventListenerMovimentacao!!)//remove o evento anterior
             }
             recuperarMovimentacoes()
@@ -224,11 +274,11 @@ class PrincipalActivity : AppCompatActivity() {
 
     override fun onStop() { //quando o app não é mais utilizado
         super.onStop()
-        if (valueEventListenerUsuario != null){
+        if (valueEventListenerUsuario != null) {
             usuarioRef.removeEventListener(valueEventListenerUsuario!!)
         }
         Log.i("eventoListener", "eventoListener foi removido")
-        if(valueEventListenerMovimentacao != null) {
+        if (valueEventListenerMovimentacao != null) {
             movimentacaoRef.removeEventListener(valueEventListenerMovimentacao!!) //está dando erro ao lançar movimentação
         }
 
