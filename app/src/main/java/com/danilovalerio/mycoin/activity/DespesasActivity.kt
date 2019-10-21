@@ -47,7 +47,7 @@ class DespesasActivity : AppCompatActivity() {
                         etData.setError("Valor obrigatório")
                     }
                 } else {
-                    movimentacao = Movimentacao(
+                    movimentacao = Movimentacao("",
                         valor.toDouble(),
                         "d",
                         mesAnoDataEscolhida(etToString(etData)),

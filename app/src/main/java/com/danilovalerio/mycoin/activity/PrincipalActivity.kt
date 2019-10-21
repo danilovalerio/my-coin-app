@@ -42,6 +42,7 @@ class PrincipalActivity : AppCompatActivity() {
     //Referencia movimentação
     private lateinit var movimentacaoRef: DatabaseReference
     private var movimentacaoList: MutableList<Movimentacao> = mutableListOf()
+    private lateinit var movimentacao: Movimentacao
 
     private var despesaTotal: Double = 0.0
     private var receitaTotal: Double = 0.0
@@ -144,7 +145,17 @@ class PrincipalActivity : AppCompatActivity() {
 
         alertDialog.setPositiveButton("Confirmar", DialogInterface.OnClickListener{
             dialogInterface, id ->
+            val pos = viewHolder.layoutPosition
+            movimentacao = movimentacaoList[pos]
 
+            val emailUsuario = auth.currentUser?.email.toString()
+            val idUsuario = codificarBase64(emailUsuario)
+
+            movimentacaoRef = firebase.child("movimentacao")
+                .child(idUsuario)
+                .child(mesAnoSelecionado)
+            movimentacaoRef.child(movimentacao.id!!).removeValue()
+            movimentacaoAdapter.notifyItemRemoved(pos)
         })
 
         alertDialog.setNegativeButton("Cancelar", DialogInterface.OnClickListener{
@@ -170,7 +181,7 @@ class PrincipalActivity : AppCompatActivity() {
             movimentacaoRef.addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     movimentacaoList.clear()
-
+                    var id: String? = null
                     var valor: Double? = null
                     var tipo: String? = null
                     var data: String? = null
@@ -184,19 +195,21 @@ class PrincipalActivity : AppCompatActivity() {
 
                         Log.i(
                             "testeDados",
-                            "msg :" + listDados["valor"].toString()
+                            "msg :"+ dados.key.toString()
+                                    + listDados["valor"].toString()
                                     + listDados["tipo"]
                                     + listDados["data"]
                                     + listDados["categoria"]
                                     + listDados["descricao"]
                         )
+                        id = dados.key.toString()
                         valor = listDados["valor"].toString().toDouble()
                         tipo = listDados["tipo"].toString()
                         data = listDados["data"].toString()
                         categoria = listDados["categoria"].toString()
                         descricao = listDados["descricao"].toString()
 
-                        movimentacaoList.add(Movimentacao(valor, tipo, data, categoria, descricao))
+                        movimentacaoList.add(Movimentacao(id,valor, tipo, data, categoria, descricao))
                     }
 
                     movimentacaoAdapter.notifyDataSetChanged()

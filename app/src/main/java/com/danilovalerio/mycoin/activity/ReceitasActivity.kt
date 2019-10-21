@@ -46,7 +46,7 @@ class ReceitasActivity : AppCompatActivity()  {
                         etData.setError("Valor obrigatório")
                     }
                 } else {
-                    movimentacao = Movimentacao(
+                    movimentacao = Movimentacao(null,
                         valor.toDouble(),
                         "r",
                         mesAnoDataEscolhida(etToString(etData)),
