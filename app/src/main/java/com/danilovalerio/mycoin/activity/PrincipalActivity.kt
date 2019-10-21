@@ -145,7 +145,7 @@ class PrincipalActivity : AppCompatActivity() {
 
         alertDialog.setPositiveButton("Confirmar", DialogInterface.OnClickListener{
             dialogInterface, id ->
-            val pos = viewHolder.layoutPosition
+            val pos = viewHolder.layoutPosition //pega posição do item no recyclerView
             movimentacao = movimentacaoList[pos]
 
             val emailUsuario = auth.currentUser?.email.toString()
@@ -155,6 +155,9 @@ class PrincipalActivity : AppCompatActivity() {
                 .child(idUsuario)
                 .child(mesAnoSelecionado)
             movimentacaoRef.child(movimentacao.id!!).removeValue()
+
+            atualizarSaldo(movimentacao.valor.toDouble(), movimentacao.tipo)
+
             movimentacaoAdapter.notifyItemRemoved(pos)
         })
 
@@ -167,6 +170,21 @@ class PrincipalActivity : AppCompatActivity() {
         alertDialog.create()
         alertDialog.show()
 
+    }
+
+    private fun atualizarSaldo(valor: Double, tipo: String){
+
+        val emailUsuario = auth.currentUser?.email.toString()
+        val idUsuario = codificarBase64(emailUsuario)
+        val usuarioRef: DatabaseReference = firebase.child("usuarios").child(idUsuario)
+
+        if(tipo.equals("r")){
+            receitaTotal = receitaTotal + valor
+            usuarioRef.child("receitaTotal").setValue(receitaTotal)
+        } else {
+            despesaTotal = despesaTotal - valor
+            usuarioRef.child("despesaTotal").setValue(despesaTotal)
+        }
     }
 
     private fun recuperarMovimentacoes() {

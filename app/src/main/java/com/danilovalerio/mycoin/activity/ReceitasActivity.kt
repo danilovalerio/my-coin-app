@@ -26,6 +26,8 @@ class ReceitasActivity : AppCompatActivity()  {
         firebase = FirebaseDatabase.getInstance().getReference()
         etData.setText(dataAtual())
 
+        etValor.requestFocus()
+
         recuperarReceitaTotal()
 
         listeners()

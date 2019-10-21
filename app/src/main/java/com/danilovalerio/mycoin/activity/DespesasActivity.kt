@@ -27,6 +27,8 @@ class DespesasActivity : AppCompatActivity() {
         firebase = FirebaseDatabase.getInstance().getReference()
         etData.setText(dataAtual())
 
+        etValor.requestFocus()
+
         recuperarDespesaTotal()
 
         listeners()
