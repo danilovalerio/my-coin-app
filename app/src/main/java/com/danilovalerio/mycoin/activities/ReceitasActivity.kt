@@ -1,14 +1,21 @@
 package com.danilovalerio.mycoin.activities
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.danilovalerio.mycoin.R
+import androidx.appcompat.app.AppCompatActivity
 import com.danilovalerio.mycoin.helper.*
 import com.danilovalerio.mycoin.model.Movimentacao
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_despesas.*
+import android.text.Editable
+import android.text.TextWatcher
+import androidx.core.app.ComponentActivity.ExtraData
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import androidx.core.widget.doOnTextChanged
+
 
 class ReceitasActivity : AppCompatActivity()  {
     private lateinit var auth: FirebaseAuth
@@ -67,6 +74,11 @@ class ReceitasActivity : AppCompatActivity()  {
             } catch (e: Exception) {
                 msgShort(this, "Erro ao salvar " + e)
             }
+        }
+
+        //escuta a alteração no texto
+        etValor.doOnTextChanged { text, start, count, after ->
+            Log.i("texto", text.toString())
         }
     }
 

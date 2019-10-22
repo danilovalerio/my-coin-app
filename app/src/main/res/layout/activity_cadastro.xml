@@ -38,27 +38,6 @@
         app:layout_constraintTop_toBottomOf="@+id/tvCriarConta"
         style="@style/editTextDados"/>
 
-<!--    <com.google.android.material.textfield.TextInputLayout-->
-<!--        android:id="@+id/etNome"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="32dp"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.5"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/tvCriarConta">-->
-
-<!--        <com.google.android.material.textfield.TextInputEditText-->
-<!--            -->
-<!--            style="@style/editTextDados"-->
-<!--            android:layout_width="300dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:drawableLeft="@drawable/ic_person"-->
-<!--            android:drawablePadding="10dp"-->
-<!--            android:hint="Nome" />-->
-<!--    </com.google.android.material.textfield.TextInputLayout>-->
-
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/etEmail"
         android:layout_width="0dp"
@@ -77,27 +56,6 @@
         app:layout_constraintTop_toBottomOf="@+id/etNome"
         style="@style/editTextDados"/>
 
-<!--    <com.google.android.material.textfield.TextInputLayout-->
-<!--        android:id="@+id/tiLay2"-->
-<!--        android:layout_width="0dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="32dp"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/tiLay3"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.5"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/etNome">-->
-
-<!--        <com.google.android.material.textfield.TextInputEditText-->
-<!--            android:id="@+id/etEmail"-->
-<!--            android:layout_width="300dp"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:drawableLeft="@drawable/ic_email"-->
-<!--            android:drawablePadding="10dp"-->
-<!--            android:hint="E-mail" />-->
-<!--    </com.google.android.material.textfield.TextInputLayout>-->
-
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/etSenha"
         android:layout_width="0dp"
@@ -114,8 +72,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etEmail"
-        android:inputType="textPassword"
+        app:passwordToggleTint="@color/textWhite"
         app:passwordToggleEnabled="true"
+        app:passwordToggleDrawable="@drawable/bg_btn_arredondado_white"
+        android:inputType="textPassword"
         style="@style/editTextDados"/>
 
     <Button

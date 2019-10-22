@@ -53,6 +53,9 @@ class PrincipalActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_principal)
 
+        setSupportActionBar(toolbar)
+
+
         //Adapter das movimentações
         movimentacaoAdapter =
             MovimentacaoAdapter(this, movimentacaoList)
@@ -179,7 +182,7 @@ class PrincipalActivity : AppCompatActivity() {
         val usuarioRef: DatabaseReference = firebase.child("usuarios").child(idUsuario)
 
         if(tipo.equals("r")){
-            receitaTotal = receitaTotal + valor
+            receitaTotal = receitaTotal - valor
             usuarioRef.child("receitaTotal").setValue(receitaTotal)
         } else {
             despesaTotal = despesaTotal - valor
