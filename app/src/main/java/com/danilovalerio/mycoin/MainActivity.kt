@@ -3,8 +3,8 @@ package com.danilovalerio.mycoin
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.danilovalerio.mycoin.activity.CadastroActivity
-import com.danilovalerio.mycoin.activity.LoginActivity
+import com.danilovalerio.mycoin.activities.CadastroActivity
+import com.danilovalerio.mycoin.activities.LoginActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 

@@ -36,11 +36,21 @@
     </style>
 
     <!--  Estilo padrão editText  -->
-    <style name="teste">
+    <style name="editTextDados">
         <item name="android:textColor">@color/textWhite</item>
         <item name="android:textColorHint">#66FFFFFF</item>
         <item name="android:padding">10dp</item>
         <item name="android:background">@drawable/bg_btn_arredondado_colorprimary</item>
+    </style>
+
+    <!--  Estilo para lançamentos das movimentaçõse  -->
+    <style name="receitaDespesa">
+        <item name="android:textColor">@color/textWhite</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColorHint">#66FFFFFF</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:textAlignment">center</item>
+
     </style>
 
 </resources>

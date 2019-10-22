@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.DespesasActivity">
+    tools:context=".activities.DespesasActivity">
 
 <!--    <com.google.android.material.appbar.AppBarLayout-->
 <!--        android:id="@+id/appBarLayout2"-->
@@ -35,7 +35,8 @@
             android:background="@android:color/transparent"
             android:textColor="@android:color/white"
             android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"/>
+            android:layout_marginRight="30dp"
+            style="@style/receitaDespesa"/>
     </LinearLayout>
 
     <com.google.android.material.textfield.TextInputLayout

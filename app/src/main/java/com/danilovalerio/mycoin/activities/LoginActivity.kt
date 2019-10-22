@@ -1,10 +1,9 @@
-package com.danilovalerio.mycoin.activity
+package com.danilovalerio.mycoin.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.core.graphics.toColorFilter
 import androidx.core.graphics.toColorInt
 import com.danilovalerio.mycoin.*
 import com.danilovalerio.mycoin.helper.etToString
@@ -30,6 +29,8 @@ class LoginActivity : AppCompatActivity() {
             startActivity(Intent(this, PrincipalActivity::class.java))
             finish()
         }
+
+        etEmail.requestFocus()
     }
 
     private fun listeners(){
@@ -49,19 +50,23 @@ class LoginActivity : AppCompatActivity() {
 
         try {
             val corError = "#FFFC00"
-            if (!validarEmail(email)) {
-                etEmail.setError("E-mail inválido.")
-                etEmail.setHintTextColor(corError.toColorInt())
-            }
 
             if (!validarStr(email)) {
                 etEmail.setError("Preencha este campo.")
                 etEmail.setHintTextColor(corError.toColorInt())
+                etEmail.requestFocus()
+            }
+
+            if (!validarEmail(email)) {
+                etEmail.setError("E-mail inválido.")
+                etEmail.setHintTextColor(corError.toColorInt())
+                etEmail.requestFocus()
             }
 
             if (!validarStr(senha)) {
                 etSenha.setError("Preencha este campo.")
-                etEmail.setHintTextColor(corError.toColorInt())
+                etSenha.setHintTextColor(corError.toColorInt())
+                etEmail.requestFocus()
             }
 
             if (!validarEmail(email) || !validarStr(email) || !validarStr(senha)) {

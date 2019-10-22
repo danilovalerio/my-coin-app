@@ -1,8 +1,8 @@
-package com.danilovalerio.mycoin.activity
+package com.danilovalerio.mycoin.activities
 
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
 import com.danilovalerio.mycoin.R
 import com.danilovalerio.mycoin.helper.*
 import com.danilovalerio.mycoin.model.Movimentacao
@@ -10,18 +10,17 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_despesas.*
 
-
-class DespesasActivity : AppCompatActivity() {
+class ReceitasActivity : AppCompatActivity()  {
     private lateinit var auth: FirebaseAuth
     private lateinit var firebase: DatabaseReference
     private lateinit var movimentacao: Movimentacao
-    private var despesaTotal: Double = 0.0
-    private var despesaGerada: Double = 0.0
-    private var despesaAtualizada: Double = 0.0 //total + atualizada
+    private var receitaTotal: Double = 0.0
+    private var receitaGerada: Double = 0.0
+    private var receitaAtualizada: Double = 0.0 //total + atualizada
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_despesas)
+        setContentView(R.layout.activity_receitas)
 
         auth = FirebaseAuth.getInstance()
         firebase = FirebaseDatabase.getInstance().getReference()
@@ -29,7 +28,7 @@ class DespesasActivity : AppCompatActivity() {
 
         etValor.requestFocus()
 
-        recuperarDespesaTotal()
+        recuperarReceitaTotal()
 
         listeners()
 
@@ -49,9 +48,9 @@ class DespesasActivity : AppCompatActivity() {
                         etData.setError("Valor obrigatório")
                     }
                 } else {
-                    movimentacao = Movimentacao("",
+                    movimentacao = Movimentacao(null,
                         valor.toDouble(),
-                        "d",
+                        "r",
                         mesAnoDataEscolhida(etToString(etData)),
                         if (!etToString(etCategoria).isNullOrEmpty()) etToString(etCategoria) else null,
                         if (!etToString(etDescricao).isNullOrEmpty()) etToString(etDescricao) else null
@@ -59,10 +58,10 @@ class DespesasActivity : AppCompatActivity() {
 
                     salvarMovimentacao(movimentacao)
 
-                    despesaGerada = valor.toDouble()
-                    despesaAtualizada = (despesaTotal.plus(despesaGerada))
+                    receitaGerada = valor.toDouble()
+                    receitaAtualizada = (receitaTotal.plus(receitaGerada))
 
-                    atualizarDespesaTotal(despesaAtualizada)
+                    atualizarReceitaTotal(receitaAtualizada)
 
                 }
             } catch (e: Exception) {
@@ -90,7 +89,7 @@ class DespesasActivity : AppCompatActivity() {
         }
     }
 
-    private fun recuperarDespesaTotal(){
+    private fun recuperarReceitaTotal(){
         val emailUsuario = auth.currentUser?.email.toString()
         val idUsuario = codificarBase64(emailUsuario)
         val usuarioRef: DatabaseReference = firebase.child("usuarios").child(idUsuario)
@@ -101,8 +100,8 @@ class DespesasActivity : AppCompatActivity() {
                     val anyMap: HashMap<Any, Any>
                     anyMap = dataSnapshot.getValue() as HashMap<Any,Any>
 
-                    val valorDespesa = anyMap.getValue("despesaTotal").toString()
-                    despesaTotal = valorDespesa.toDouble()
+                    val valorDespesa = anyMap.getValue("receitaTotal").toString()
+                    receitaTotal = valorDespesa.toDouble()
                 }
             }
 
@@ -112,13 +111,13 @@ class DespesasActivity : AppCompatActivity() {
         })
     }
 
-    private fun atualizarDespesaTotal(despesa: Double){
+    private fun atualizarReceitaTotal(receita: Double){
 
         val emailUsuario = auth.currentUser?.email.toString()
         val idUsuario = codificarBase64(emailUsuario)
         val usuarioRef: DatabaseReference = firebase.child("usuarios").child(idUsuario)
 
-        usuarioRef.child("despesaTotal").setValue(despesa)
+        usuarioRef.child("receitaTotal").setValue(receita)
 
     }
 

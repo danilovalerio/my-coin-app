@@ -1,4 +1,4 @@
-package com.danilovalerio.mycoin.activity
+package com.danilovalerio.mycoin.activities
 
 import android.content.DialogInterface
 import android.content.Intent

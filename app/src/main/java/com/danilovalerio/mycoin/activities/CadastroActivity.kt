@@ -1,10 +1,9 @@
-package com.danilovalerio.mycoin.activity
+package com.danilovalerio.mycoin.activities
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.danilovalerio.mycoin.R
-import com.danilovalerio.mycoin.config.ConfiguracaoFirebase
 import com.danilovalerio.mycoin.helper.*
 import com.danilovalerio.mycoin.model.Usuario
 import com.google.firebase.auth.FirebaseAuth
@@ -41,21 +40,31 @@ class CadastroActivity : AppCompatActivity() {
     }
 
     private fun criarLogin(nome: String, email: String, senha: String) {
+        val corError = "#FFFC00"
+
         //Validar campos vazios
         if (nome.isEmpty()) {
             etNome.setError("Este campo não pode ser vazio")
+            mudarEditTextHintColor(etNome,corError)
+            etEmail.requestFocus()
         }
 
         if (email.isEmpty()) {
             etEmail.setError("Este campo não pode ser vazio")
+            mudarEditTextHintColor(etEmail,corError)
+            etEmail.requestFocus()
         }
 
         if (senha.isEmpty()) {
             etSenha.setError("Este campo não pode ser vazio")
+            mudarEditTextHintColor(etSenha,corError)
+            etSenha.requestFocus()
         }
 
         if (!validarEmail(email)) {
             etEmail.setError("E-mail inválido")
+            mudarEditTextHintColor(etEmail,corError)
+            etEmail.requestFocus()
         }
 
         if (nome.isEmpty() || email.isEmpty() || senha.isEmpty()) {

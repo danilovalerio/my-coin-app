@@ -3,6 +3,7 @@ package com.danilovalerio.mycoin.helper
 import android.content.Context
 import android.widget.EditText
 import android.widget.Toast
+import androidx.core.graphics.toColorInt
 
 fun etToString(et: EditText): String {
     return et.text.toString()
@@ -32,4 +33,8 @@ fun mesesPortugues() : Array<String> {
     return meses
 //    var semanas = arrayOf<String>("Seg","Ter","Qua","Qui","Sex","Sáb","Dom")
 //    calendarView.setWeekDayLabels(semanas)
+}
+
+fun mudarEditTextHintColor(campo:EditText, cor: String){
+    return campo.setHintTextColor(cor.toColorInt())
 }
