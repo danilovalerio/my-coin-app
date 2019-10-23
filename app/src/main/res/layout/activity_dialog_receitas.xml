@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.activities.ReceitasActivity">
 
-
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
@@ -29,6 +28,7 @@
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             style="@style/receitaDespesa"
+            android:focusable="true"
             android:digits="[0123456789]"/>
 
     </LinearLayout>
@@ -37,9 +37,9 @@
         android:id="@+id/tilData"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="36dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="26dp"
-        android:layout_marginRight="36dp"
+        android:layout_marginRight="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
@@ -47,7 +47,7 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etData"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:hint="Data: 00/00/0000"
@@ -63,12 +63,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tilData"
-        android:layout_marginLeft="36dp"
-        android:layout_marginRight="36dp">
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etCategoria"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:hint="Categoria: Ex.: Salário"
@@ -84,12 +84,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tilCategoria"
-        android:layout_marginLeft="36dp"
-        android:layout_marginRight="36dp">
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etDescricao"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:paddingLeft="5dp"
@@ -100,15 +100,15 @@
     </com.google.android.material.textfield.TextInputLayout>
 
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabSalvar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:clickable="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tilDescricao"
-        app:srcCompat="@drawable/ic_check_white" />
+<!--    <com.google.android.material.floatingactionbutton.FloatingActionButton-->
+<!--        android:id="@+id/fabSalvar"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="16dp"-->
+<!--        android:clickable="true"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/tilDescricao"-->
+<!--        app:srcCompat="@drawable/ic_check_white" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

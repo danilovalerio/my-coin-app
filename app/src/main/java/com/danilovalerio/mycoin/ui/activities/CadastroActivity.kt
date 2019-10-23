@@ -1,11 +1,11 @@
-package com.danilovalerio.mycoin.activities
+package com.danilovalerio.mycoin.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.danilovalerio.mycoin.R
-import com.danilovalerio.mycoin.helper.*
-import com.danilovalerio.mycoin.model.Usuario
+import com.danilovalerio.mycoin.util.*
+import com.danilovalerio.mycoin.data.model.Usuario
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
@@ -76,9 +76,15 @@ class CadastroActivity : AppCompatActivity() {
                 if (task.isSuccessful) {
                     val user = auth.currentUser
                     msgShort(this, "Usuário criado com sucesso.\n" + auth.uid.toString())
-                    val usuario = Usuario(auth.uid.toString(), nome, email, senha)
+                    val usuario = Usuario(
+                        auth.uid.toString(),
+                        nome,
+                        email,
+                        senha
+                    )
                     salvarUsuarioEmailId(usuario)
-                    startActivity(Intent(this,PrincipalActivity::class.java))
+                    startActivity(Intent(this,
+                        PrincipalActivity::class.java))
                     finish()
                 } else {
                     msgShort(

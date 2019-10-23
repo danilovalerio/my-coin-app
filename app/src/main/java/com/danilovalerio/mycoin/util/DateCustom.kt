@@ -1,4 +1,4 @@
-package com.danilovalerio.mycoin.helper
+package com.danilovalerio.mycoin.util
 
 import java.text.SimpleDateFormat
 

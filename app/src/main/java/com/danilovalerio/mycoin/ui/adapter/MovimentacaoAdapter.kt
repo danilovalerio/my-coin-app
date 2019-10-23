@@ -1,4 +1,4 @@
-package com.danilovalerio.mycoin.adapter
+package com.danilovalerio.mycoin.ui.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.danilovalerio.mycoin.R
 import com.danilovalerio.mycoin.R.color.colorPrimaryDespesa
 import com.danilovalerio.mycoin.R.color.colorPrimaryReceita
-import com.danilovalerio.mycoin.model.Movimentacao
+import com.danilovalerio.mycoin.data.model.Movimentacao
 import kotlinx.android.synthetic.main.item_rv_movimentos.view.*
 import kotlin.math.absoluteValue
 
@@ -56,5 +56,11 @@ class MovimentacaoAdapter(
 
 
         }
+    }
+
+    fun add(itens: List<Movimentacao>){
+        movimentacaoList.clear()
+        movimentacaoList.addAll(itens)
+        notifyDataSetChanged()
     }
 }

@@ -1,4 +1,4 @@
-package com.danilovalerio.mycoin.helper
+package com.danilovalerio.mycoin.util
 
 import android.content.Context
 import android.widget.EditText

@@ -1,4 +1,4 @@
-package com.danilovalerio.mycoin.activities
+package com.danilovalerio.mycoin.ui.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,10 +6,10 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.core.graphics.toColorInt
 import com.danilovalerio.mycoin.*
-import com.danilovalerio.mycoin.helper.etToString
-import com.danilovalerio.mycoin.helper.msgShort
-import com.danilovalerio.mycoin.helper.validarEmail
-import com.danilovalerio.mycoin.helper.validarStr
+import com.danilovalerio.mycoin.util.etToString
+import com.danilovalerio.mycoin.util.msgShort
+import com.danilovalerio.mycoin.util.validarEmail
+import com.danilovalerio.mycoin.util.validarStr
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
 import java.lang.Exception
@@ -35,7 +35,8 @@ class LoginActivity : AppCompatActivity() {
 
     private fun listeners(){
         tvCriarConta.setOnClickListener(){
-            startActivity(Intent(this,CadastroActivity::class.java))
+            startActivity(Intent(this,
+                CadastroActivity::class.java))
         }
 
         btnAcessar.setOnClickListener(){

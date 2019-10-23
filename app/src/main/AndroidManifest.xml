@@ -9,29 +9,29 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.ReceitasActivity"
+        <activity android:name="com.danilovalerio.mycoin.ui.activities.ReceitasActivity"
             android:theme="@style/receitaTheme">
         </activity>
-        <activity android:name=".activities.DespesasActivity"
+        <activity android:name="com.danilovalerio.mycoin.ui.activities.DespesasActivity"
             android:theme="@style/despesaTheme">
         </activity>
         <activity
-            android:name=".activities.PrincipalActivity"
+            android:name="com.danilovalerio.mycoin.ui.activities.PrincipalActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".activities.LoginActivity">
+        <activity android:name="com.danilovalerio.mycoin.ui.activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.CadastroActivity"
-            android:parentActivityName=".activities.LoginActivity">
+        <activity android:name="com.danilovalerio.mycoin.ui.activities.CadastroActivity"
+            android:parentActivityName="com.danilovalerio.mycoin.ui.activities.LoginActivity">
 
 
         </activity>
-        <activity android:name=".MainActivity">
+        <activity android:name=".ui.activities.MainActivity">
 
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->

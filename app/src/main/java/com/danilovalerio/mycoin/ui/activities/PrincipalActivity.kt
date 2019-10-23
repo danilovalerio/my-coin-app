@@ -1,20 +1,22 @@
-package com.danilovalerio.mycoin.activities
+package com.danilovalerio.mycoin.ui.activities
 
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.danilovalerio.mycoin.adapter.MovimentacaoAdapter
-import com.danilovalerio.mycoin.helper.codificarBase64
-import com.danilovalerio.mycoin.helper.mesesPortugues
-import com.danilovalerio.mycoin.helper.msgShort
-import com.danilovalerio.mycoin.model.Movimentacao
+import com.danilovalerio.mycoin.ui.adapter.MovimentacaoAdapter
+import com.danilovalerio.mycoin.util.codificarBase64
+import com.danilovalerio.mycoin.util.mesesPortugues
+import com.danilovalerio.mycoin.util.msgShort
+import com.danilovalerio.mycoin.data.model.Movimentacao
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.prolificinteractive.materialcalendarview.CalendarDay
@@ -27,6 +29,8 @@ import com.danilovalerio.mycoin.R
 import kotlin.collections.HashMap
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import androidx.recyclerview.widget.RecyclerView
+import com.danilovalerio.mycoin.viewmodels.MovimentacoesViewModel
+import kotlinx.android.synthetic.main.activity_receitas.view.*
 
 
 class PrincipalActivity : AppCompatActivity() {
@@ -49,12 +53,13 @@ class PrincipalActivity : AppCompatActivity() {
     private var resumoUsuario: Double = 0.0
     lateinit var mesAnoSelecionado: String
 
+    private lateinit var movimentacoesViewModel: MovimentacoesViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_principal)
 
         setSupportActionBar(toolbar)
-
 
         //Adapter das movimentações
         movimentacaoAdapter =
@@ -62,6 +67,20 @@ class PrincipalActivity : AppCompatActivity() {
         recViewMovimentos.adapter = movimentacaoAdapter
         recViewMovimentos.layoutManager = LinearLayoutManager(this)
         //recViewMovimentos.smoothScrollToPosition(movimentacaoList.size)
+
+        //inicializar o ViewModel Movimentacao pode ser feito em fragments e am activities
+        movimentacoesViewModel = ViewModelProviders.of(this).get(MovimentacoesViewModel::class.java)
+
+        movimentacoesViewModel.getMovimentacoes()?.observe(this, androidx.lifecycle.Observer { data ->
+            data?.let {
+                if(it.isEmpty()){
+                    msgShort(this,"Lista vazia!")
+                } else {
+                    movimentacaoAdapter.add(it)
+                }
+
+            }
+        })
 
         auth = FirebaseAuth.getInstance()
         firebase = FirebaseDatabase.getInstance().getReference()
@@ -94,8 +113,6 @@ class PrincipalActivity : AppCompatActivity() {
             mesAtual = "0" + mesAtual
         }
         mesAnoSelecionado = mesAtual + dataAtual.year.toString()
-
-
     }
 
     fun swipe() {
@@ -230,7 +247,16 @@ class PrincipalActivity : AppCompatActivity() {
                         categoria = listDados["categoria"].toString()
                         descricao = listDados["descricao"].toString()
 
-                        movimentacaoList.add(Movimentacao(id,valor, tipo, data, categoria, descricao))
+                        movimentacaoList.add(
+                            Movimentacao(
+                                id,
+                                valor,
+                                tipo,
+                                data,
+                                categoria,
+                                descricao
+                            )
+                        )
                     }
 
                     movimentacaoAdapter.notifyDataSetChanged()
@@ -306,7 +332,8 @@ class PrincipalActivity : AppCompatActivity() {
 
         menu_receita.setOnClickListener() {
             msgShort(this, "Cadastro de receita")
-            startActivity(Intent(this, ReceitasActivity::class.java))
+//            startActivity(Intent(this, ReceitasActivity::class.java))
+            dialogoAddMovimentacaoReceita()
         }
 
         var mesSelecionado = ""
@@ -329,7 +356,7 @@ class PrincipalActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
         recuperarResumo()
-        recuperarMovimentacoes()
+//        recuperarMovimentacoes()
     }
 
     override fun onStop() { //quando o app não é mais utilizado
@@ -342,6 +369,31 @@ class PrincipalActivity : AppCompatActivity() {
             movimentacaoRef.removeEventListener(valueEventListenerMovimentacao!!) //está dando erro ao lançar movimentação
         }
 
+    }
+
+    private fun dialogoAddMovimentacaoReceita(){
+        val layout = LayoutInflater.from(this)
+            .inflate(R.layout.activity_dialog_receitas, null, false)
+
+        val dialog = AlertDialog.Builder(this)
+        dialog.setView(layout)
+        dialog.setNegativeButton("Cancelar", null)
+        dialog.setPositiveButton("Salvar"){
+            d, i ->
+            //salvar nota
+            val movimentacao = Movimentacao(
+                null,
+                layout.etValor.text.toString().toDouble(),
+                "r",
+                layout.etData.text.toString(),
+                layout.etCategoria.text.toString(),
+                layout.etDescricao.text.toString()
+            )
+
+            movimentacoesViewModel.salvar(movimentacao)
+        }
+
+        dialog.create().show()
     }
 
 }

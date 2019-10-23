@@ -1,10 +1,9 @@
-package com.danilovalerio.mycoin
+package com.danilovalerio.mycoin.ui.activities
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.danilovalerio.mycoin.activities.CadastroActivity
-import com.danilovalerio.mycoin.activities.LoginActivity
+import com.danilovalerio.mycoin.R
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -24,8 +23,8 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, CadastroActivity::class.java))
         }
 
-        tvJaTenhoConta.setOnClickListener(){
-            startActivity(Intent(this, LoginActivity::class.java))
-        }
+//        tvJaTenhoConta.setOnClickListener(){
+//            startActivity(Intent(this, LoginActivity::class.java))
+//        }
     }
 }
