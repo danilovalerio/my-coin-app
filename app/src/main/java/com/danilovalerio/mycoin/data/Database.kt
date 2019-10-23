@@ -9,16 +9,17 @@ class Database {
 
     fun insertMovimentacao(movimentacao: Movimentacao){
         var tmp = mDatabase.value
+
         if (tmp == null){
             tmp = mutableListOf()
             tmp.add(movimentacao)
         } else {
-            tmp?.add(movimentacao)
+            tmp.add(movimentacao)
         }
         mDatabase.postValue(tmp)
     }
 
-    fun getMovimentacoes() = mDatabase.value
+    fun getMovimentacoes() = mDatabase
 
 
 }

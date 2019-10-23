@@ -32,9 +32,12 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import androidx.recyclerview.widget.RecyclerView
 import com.danilovalerio.mycoin.viewmodels.MovimentacoesViewModel
 import kotlinx.android.synthetic.main.activity_receitas.view.*
+import org.koin.android.viewmodel.ext.android.viewModel
 
 
 class PrincipalActivity : AppCompatActivity() {
+    private val movimentacoesViewModel: MovimentacoesViewModel by viewModel()
+
     private lateinit var auth: FirebaseAuth
     private lateinit var firebase: DatabaseReference
     private lateinit var usuarioRef: DatabaseReference
@@ -54,7 +57,7 @@ class PrincipalActivity : AppCompatActivity() {
     private var resumoUsuario: Double = 0.0
     lateinit var mesAnoSelecionado: String
 
-    private lateinit var movimentacoesViewModel: MovimentacoesViewModel
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,7 +73,7 @@ class PrincipalActivity : AppCompatActivity() {
         //recViewMovimentos.smoothScrollToPosition(movimentacaoList.size)
 
         //inicializar o ViewModel Movimentacao pode ser feito em fragments e am activities
-        movimentacoesViewModel = ViewModelProviders.of(this).get(MovimentacoesViewModel::class.java)
+        //movimentacoesViewModel = ViewModelProviders.of(this).get(MovimentacoesViewModel::class.java)
 
         movimentacoesViewModel.getMovimentacoes()?.observe(this, androidx.lifecycle.Observer { data ->
             data?.let {
