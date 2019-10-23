@@ -56,8 +56,13 @@ dependencies {
     //Floating Button Menu
     implementation 'com.github.clans:fab:1.6.4'
 
+    //KOIN - injeção de dependência
+    implementation 'org.koin:koin-android:1.0.1'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'org.koin:koin-android-viewmodel:1.0.2'
+
     //viewCalendar personalizado
-    compile 'com.prolificinteractive:material-calendarview:1.4.3'
+    implementation 'com.prolificinteractive:material-calendarview:1.4.3'
 
 }
 

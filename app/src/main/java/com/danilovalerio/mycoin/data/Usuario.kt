@@ -1,4 +1,4 @@
-package com.danilovalerio.mycoin.data.model
+package com.danilovalerio.mycoin.data
 
 import com.google.firebase.database.Exclude
 

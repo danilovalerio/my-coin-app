@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.danilovalerio.mycoin.R
 import com.danilovalerio.mycoin.util.*
-import com.danilovalerio.mycoin.data.model.Usuario
+import com.danilovalerio.mycoin.data.Usuario
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase

@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
@@ -16,7 +17,7 @@ import com.danilovalerio.mycoin.ui.adapter.MovimentacaoAdapter
 import com.danilovalerio.mycoin.util.codificarBase64
 import com.danilovalerio.mycoin.util.mesesPortugues
 import com.danilovalerio.mycoin.util.msgShort
-import com.danilovalerio.mycoin.data.model.Movimentacao
+import com.danilovalerio.mycoin.data.Movimentacao
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.prolificinteractive.materialcalendarview.CalendarDay
@@ -327,13 +328,14 @@ class PrincipalActivity : AppCompatActivity() {
     private fun listeners() {
         menu_despesa.setOnClickListener() {
             msgShort(this, "Cadastro de despesa")
-            startActivity(Intent(this, DespesasActivity::class.java))
+//            startActivity(Intent(this, DespesasActivity::class.java))
+            dialogoAddMovimentacao("d")
         }
 
         menu_receita.setOnClickListener() {
             msgShort(this, "Cadastro de receita")
 //            startActivity(Intent(this, ReceitasActivity::class.java))
-            dialogoAddMovimentacaoReceita()
+            dialogoAddMovimentacao("r")
         }
 
         var mesSelecionado = ""
@@ -371,9 +373,16 @@ class PrincipalActivity : AppCompatActivity() {
 
     }
 
-    private fun dialogoAddMovimentacaoReceita(){
-        val layout = LayoutInflater.from(this)
-            .inflate(R.layout.activity_dialog_receitas, null, false)
+    private fun dialogoAddMovimentacao(tipo:String){
+        var layout: View? = null
+
+        if(tipo == "r"){
+            layout = LayoutInflater.from(this)
+                .inflate(R.layout.activity_dialog_receitas, null, false)
+        } else {
+            layout = LayoutInflater.from(this)
+                .inflate(R.layout.activity_dialog_despesas, null, false)
+        }
 
         val dialog = AlertDialog.Builder(this)
         dialog.setView(layout)
@@ -384,7 +393,7 @@ class PrincipalActivity : AppCompatActivity() {
             val movimentacao = Movimentacao(
                 null,
                 layout.etValor.text.toString().toDouble(),
-                "r",
+                tipo,
                 layout.etData.text.toString(),
                 layout.etCategoria.text.toString(),
                 layout.etDescricao.text.toString()

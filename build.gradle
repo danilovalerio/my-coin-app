@@ -14,6 +14,7 @@ buildscript {
         // in the individual module build.gradle files
         //Para usar o Firebase
         classpath 'com.google.gms:google-services:4.3.2'
+
     }
 }
 

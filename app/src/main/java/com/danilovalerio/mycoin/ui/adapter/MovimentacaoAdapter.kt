@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.danilovalerio.mycoin.R
 import com.danilovalerio.mycoin.R.color.colorPrimaryDespesa
 import com.danilovalerio.mycoin.R.color.colorPrimaryReceita
-import com.danilovalerio.mycoin.data.model.Movimentacao
+import com.danilovalerio.mycoin.data.Movimentacao
 import kotlinx.android.synthetic.main.item_rv_movimentos.view.*
 import kotlin.math.absoluteValue
 

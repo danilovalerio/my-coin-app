@@ -7,7 +7,7 @@ import androidx.core.graphics.toColorInt
 import androidx.core.widget.doOnTextChanged
 import com.danilovalerio.mycoin.R
 import com.danilovalerio.mycoin.util.*
-import com.danilovalerio.mycoin.data.model.Movimentacao
+import com.danilovalerio.mycoin.data.Movimentacao
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_receitas.*

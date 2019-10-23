@@ -1,4 +1,4 @@
-package com.danilovalerio.mycoin.data.model
+package com.danilovalerio.mycoin.data
 
 class Pessoa {
     var id:Int=0

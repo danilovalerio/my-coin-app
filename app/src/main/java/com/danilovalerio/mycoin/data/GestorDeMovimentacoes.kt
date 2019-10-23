@@ -1,11 +1,10 @@
 package com.danilovalerio.mycoin.data
 
 import androidx.lifecycle.MutableLiveData
-import com.danilovalerio.mycoin.data.model.Movimentacao
 
 
 //camada de modelo que gerencia a obtencao das movimentacoes
-class GestorDeMovimentacoes {
+class GestorDeMovimentacoes(val database: Database) {
 
 /**Mock exemplo
     private val data = mutableListOf<Movimentacao>(
@@ -51,18 +50,10 @@ class GestorDeMovimentacoes {
         )
     )
 */
-    private val data: MutableLiveData<MutableList<Movimentacao>> = MutableLiveData()
 
-    fun getMovimentacoes() = data
+    fun getMovimentacoes() = database.getMovimentacoes()
 
     fun addMovimentacao(mMovimentacao: Movimentacao) {
-        var tmp = data.value
-        if (tmp == null){
-            tmp = mutableListOf()
-            tmp.add(mMovimentacao)
-        } else {
-            tmp?.add(mMovimentacao)
-        }
-        data.postValue(tmp)
+        database.insertMovimentacao(mMovimentacao)
     }
 }
